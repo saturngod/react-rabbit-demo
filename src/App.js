@@ -1,17 +1,10 @@
-
-
-
+import logo from './logo.svg';
 import './App.css';
-
 import RabbitBox from './RabbitBox';
-
-
 function App() {
-
- 
   return (
     <div className="App">
-      <RabbitBox></RabbitBox>
+      <RabbitBox></RabbitBox>    
     </div>
   );
 }

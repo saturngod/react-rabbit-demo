@@ -3,7 +3,7 @@ var Rabbit = {
     "uni2zg": uni2zg
   }
   
-  function uni2zg(output) {
+  export function uni2zg(output) {
     var rule = [
       {
           "from": "\u1004\u103a\u1039",
@@ -330,7 +330,7 @@ var Rabbit = {
     return replace_with_rule(rule,output);
   }
   
-  function zg2uni(output) {
+  export function zg2uni(output) {
     var rule = [
       {
           "from" : "([\u102D\u102E\u103D\u102F\u1037\u1095])\\1+",
@@ -824,5 +824,3 @@ var Rabbit = {
     return output;
   
   }
-
-  export default Rabbit;

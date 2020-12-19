@@ -1,41 +1,46 @@
 import React, {useState,useRef} from "react";
-import ControlBar from "./controlbar";
+import './RabbitBox.css';
+import ControlBar from './ControlBar';
+import {zg2uni,uni2zg} from './Rabbit';
 
 function RabbitBox() {
-    var rabbit = require('./Rabbit').default;
-  
-  const [zawgyi, setZawgyi] = useState('');
-  const [unicode, setUnicode] = useState('');
-
-  
-    const zawgyiTextRef = useRef(null);
-    const unicodeTextRef =  useRef(null);
-
-  const zawgyiChange = (e) => {
-    setZawgyi(e.target.value)
-    setUnicode(rabbit.zg2uni(e.target.value))
-  }
-
-  const unicodeChange = (e) => {
     
-    setUnicode(e.target.value)
-    setZawgyi(rabbit.uni2zg(e.target.value))
-  }
-  const clearIt = () => {
-    setZawgyi("")
-    setUnicode("")
-  }
+    const [zawgyi,setZawgyi] = useState('');
+    const [unicode,setUnicode] = useState('');
 
-  return (
-    <div className="App">
-      Zawgyi
-      <textarea ref={zawgyiTextRef} className="Zawgyi" id="zawgyi" onChange={zawgyiChange} value={zawgyi}></textarea>
-      Unicode
-      <textarea ref={unicodeTextRef} className="Unicode" id="unicode" onChange={unicodeChange} value={unicode}></textarea>
+    const zawgyiRef = useRef(null);
+    const uniRef = useRef(null);
 
-      <ControlBar zawgyi={zawgyiTextRef} unicode={unicodeTextRef} clearIt={clearIt}></ControlBar>
-    </div>
-  );
-}
+    const uniChange = (e) => {
+        setUnicode(e.target.value)
+        setZawgyi(uni2zg(e.target.value))
+    }
 
-export default RabbitBox;
+    const zawgyiChange = (e) => {
+        setZawgyi(e.target.value)
+        setUnicode(zg2uni(e.target.value))
+    }
+
+    const clearIt = () => {
+        setZawgyi("")
+        setUnicode("")
+    }
+
+    return (
+        <div className="rabbit-box">
+            <div className="row">
+                <div className="col-md">
+                    <p>Unicode</p>
+                    <textarea ref={uniRef} className='unicode' onChange={uniChange} value={unicode}></textarea>
+                </div>
+                <div className="col-md">
+                    <p>Zawgyi</p>
+                    <textarea ref={zawgyiRef} className='zawgyi' onChange={zawgyiChange} value={zawgyi}></textarea>
+                </div>
+            </div>   
+            <ControlBar zawgyi={zawgyiRef} unicode={uniRef} clearIt={clearIt}></ControlBar>
+        </div>
+        )
+    }
+    
+    export default RabbitBox;

@@ -1,15 +1,19 @@
-import './controlbar.css'
+import './ControlBar.css';
 function ControlBar({zawgyi,unicode,clearIt}) {
-
-    const copyIt = (ref) => {
+    const copyToClipboard = (ref) => {
         ref.current.select()
-        document.execCommand('copy');
+        document.execCommand("copy")
     }
     return (
-        <div>
-            <input type="button" value="Copy Zawgyi" onClick={() => {copyIt(zawgyi)}}></input>
-            <input type="button" value="Copy Unicode" onClick={() => {copyIt(unicode)}}></input>
-            <input type="button" value="Clear" onClick={() => {clearIt()}}></input>
+        <div className="row control-box">
+           <div className="text-center">
+                <input type="button" className="btn btn-secondary" value="Clear" onClick={() => {clearIt()}}></input>
+                <input type="button" className="btn btn-primary" onClick={() => copyToClipboard(unicode)} value="Copy Unicode"></input>
+                <input type="button" className="btn btn-primary" onClick={() => copyToClipboard(zawgyi)} value="Copy Zawgyi"></input>
+                
+            </div>
+           
+
         </div>
     )
 }
